@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,6 +20,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
+
+  private final Joystick joystick = new Joystick(0);
+
+  private final DefaultDrive m_DefaultDrive = new DefaultDrive(m_romiDrivetrain, joystick);
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
 
@@ -33,7 +39,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    m_romiDrivetrain.setDefaultCommand(new DefaultDrive(m_romiDrivetrain, joystick));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
