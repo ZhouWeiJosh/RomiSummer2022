@@ -6,33 +6,28 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-/** Add your docs here. */
-public class LED {
-    DigitalOutput[] led;
-    DigitalInput button = new DigitalInput(0);
-    boolean buttonAOff = true;
+public class LED extends SubsystemBase {
+    DigitalOutput yellowLight = new DigitalOutput(2);
+    DigitalInput buttonA = new DigitalInput(0);
+  /** Creates a new LED. */
+  public LED() {}
 
-    public LED() { 
-        led = new DigitalOutput[3];
-        led[0] = new DigitalOutput(1);
-        led[1] = new DigitalOutput(2);
-        led[2] = new DigitalOutput(3);
-    
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
 
-    }
+  public boolean getButtonA() {
+      return buttonA.get();
+  }
 
-    public void buttonA() {
-        if(button.get()) {
-        System.out.print("Is working?");
-        led[2].set(false);
-        buttonAOff = false;
-        }else if(button.get() && buttonAOff == false){
-            led[2].set(true);
-            buttonAOff = true;
-        } 
-    }
+  public void manualOn() {
+    yellowLight.set(true);
+  }
 
-    public void buttonAOff() {
-    }
+  public void manualOff() {
+      yellowLight.set(false);
+  }
 }
